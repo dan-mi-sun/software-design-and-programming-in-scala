@@ -1,0 +1,132 @@
+package uk.ac.cam.cl.rkh23.algorithms.sorting;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+
+/**
+ * A simple class that reads in an array of numbers
+ * and farms the array out for sorting, timing how long
+ * it takes and checking the result.
+ * @author rkh23
+ *
+ */
+public class SortTester {
+	
+	private Sorter mSorter = null;
+	
+	
+	
+	/**
+	 * Constructor for the SortTester specifies the
+	 * sort alogorithm to use
+	 * @param s An object that implements the chosen sort algorithm
+	 */
+	public SortTester(Sorter s) {
+		mSorter=s;
+	}
+	
+	
+	
+	
+	/**
+	 * This function passes an array to the mSorter object 
+	 * for sorting, timing how long it takes to do so. It then
+	 * checks that the sorting algorithms worked!
+	 * @param array Input array to be sorted
+	 * @return Time taken to sort in milliseconds
+	 * @throws SortFailure The algorithm failed to sort correctly
+	 */
+	public long SortArray(int[] array) throws SortFailure {
+		// start the clock
+		long start = System.nanoTime();
+		
+		mSorter.Sort(array);
+		
+		// stop the clock
+		long stop = System.nanoTime();
+		
+		// check the results (just in case!!)
+		for (int i=1; i<array.length; i++) {
+			if (array[i-1]>array[i]) throw new SortFailure();
+		}
+		
+		return (stop-start)/1000;
+	}
+	
+	public Sorter GetSorter() { return mSorter;}
+
+	
+	public static void PrintArray(int[] array) {
+		for (int i : array) {
+			System.out.print(i+" ");
+		}
+		System.out.println("");
+	}
+	
+	
+	public static int[] LoadArray(String file, int n) {
+		int[] array = new int[n];
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			String line="";
+			int count=0;
+			while ((line = in.readLine()) != null)   {
+				array[count]=Integer.parseInt(line);;
+				count++;
+					if (count==n) break;
+			}
+			if (count!=n) throw new Exception();
+			in.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return array;
+	}
+	
+		public String GetID() {
+			return this.mSorter.GetID();
+		}
+	
+		
+		public static void StripNegatives(List l) {
+			   for (int i=0; i<l.size(); i++) {
+				 System.out.println(i);
+			     Object o = l.get(i);
+			     Integer x = (Integer)o;
+			     if (x.intValue()<0) l.remove(i);
+			   }
+			   
+			}
+		
+	
+	/**
+	 * Main function that does the work
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		
+		int[] array = new int[]{1,2,3,4,5,6,7,8,9};//21,7,3,6,2};//,8,1,1,5,7,8,20, 19};
+		
+		for (int i=0; i<array.length; i++) {
+			System.out.print(array[i]+" ");
+		}
+		System.out.println("");
+
+		// Set up something to do the sorting
+		SortTester test = new SortTester(new QuickSortRandom());
+		
+		test.GetSorter().Sort(array);
+
+		for (int i=0; i<array.length; i++) {
+			System.out.print(array[i]+" ");
+		}
+		System.out.println("");
+	}
+
+}

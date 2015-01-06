@@ -1,0 +1,75 @@
+package Algorithms.Sorting;
+
+public class MergeSort implements Sorter {
+
+    @Override
+    public String GetID() {
+        // TODO Auto-generated method stub
+        return "Merge";
+    }
+
+    @Override
+    public void Sort(int[] array) {
+        // TODO Auto-generated method stub
+        int r[] = DoMergeSort(array, 0, array.length - 1);
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = r[i];
+        }
+    }
+
+
+    /**
+     * This function is called recursively
+     * to sort its input array.  It is not space
+     * efficient (that's left as an exercise in the notes).
+     * OOP course: Why is it private and static?
+     */
+    private static int[] DoMergeSort(int[] array, int l, int r) {
+
+        if (l == r) {
+            //  Only one element, so it's sorted!
+            int[] res = new int[1];
+            res[0] = array[l];
+            return res;
+        }
+
+        // Find the split point
+        int c = (int) Math.ceil((r - l + 1) / 2.0);
+
+        // Recursively sort the two halves
+        int[] a1 = DoMergeSort(array, l, l + c - 1);
+        int[] a2 = DoMergeSort(array, l + c, r);
+
+        // Merge the results together
+        return DoMerge(a1, a2);
+    }
+
+    /**
+     * This function merges two sorted arrays into one
+     * big sorted array (which it creates)
+     *
+     * @param a1 first input array (sorted)
+     * @param a2 second input array (sorted)
+     * @return merged array (sorted)
+     */
+    private static int[] DoMerge(int[] a1, int[] a2) {
+        int[] result = new int[a1.length + a2.length];
+
+        int i1 = 0;
+        int i2 = 0;
+        for (int i = 0; i < a1.length + a2.length; i++) {
+            if (i1 == a1.length) result[i] = a2[i2++];
+            else if (i2 == a2.length) result[i] = a1[i1++];
+            else if (a1[i1] < a2[i2]) {
+                result[i] = a1[i1++];
+            } else {
+                result[i] = a2[i2++];
+            }
+        }
+
+        return result;
+    }
+
+
+}

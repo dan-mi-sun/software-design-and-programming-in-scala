@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/atomicscala/" kind="src" path="app"/>
+	<classpathentry kind="src" path="app/com/atomicscala"/>
+	<classpathentry kind="src" path="examples"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="activator-launch-0.4.2.jar"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/scala-2.10/classes"/>
+</classpath>

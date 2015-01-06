@@ -1,0 +1,80 @@
+package uk.ac.cam.cl.rkh23.algorithms.sorting;
+
+
+public abstract class QuickSort implements Sorter {
+	
+	
+	@Override
+	public String GetID() {
+		return "Quick";
+	}
+
+	@Override
+	public void Sort(int[] array) {
+		DoQuickSort(array,0,array.length-1);
+	}
+	
+	/**
+	 * An abstract function that selects a pivot given
+	 * the array we're sorting
+	 * @return
+	 */
+	protected abstract int SelectPivot(int[] array, int first, int last);
+	
+	
+	/**
+	 * This quicksort is written for clarity not optimal performance (tho it should
+	 * achieve nlogn of course).  It is subtley different to what is in the notes
+	 * but if you think about it the differences are rather trivial.
+	 * 
+	 * @param array input array containing the subarray to sort
+	 * @param first index into array for the first element of the subarray
+	 * @param last index into array for the last element of the subarray
+	 */
+	private void DoQuickSort(int[] array, int first, int last) {
+		
+		// Select a pivot
+		int iPivot = SelectPivot(array,first,last);
+		int pivot = array[iPivot];
+		
+		// Setup pointers
+		int iLeft = first;
+		int iRight = last;
+		
+		// Run until the pointers have passed each other
+		while (iLeft <= iRight) {
+			
+			// Move the left pointer until we find an element that is
+			// >= to the pivot
+			while (array[iLeft] < pivot) iLeft++;
+			
+			// Move the right pointer until we find an element
+			// that is <= to the pivot
+			while (array[iRight] > pivot) iRight--;
+			
+			// The pointers shouldn't have passed each other
+			// and so we swap what they point to and move the pointers 
+			// one along in their direction. Note that if they have met, 
+			// this will not affect the array, and will cause the pointers
+			// to cross so that the main loop ends
+			if (iLeft<=iRight) {
+				swap(array,iLeft,iRight);
+				iLeft++;
+				iRight--;
+			}
+		}
+		
+		// If the pivot has elements to the left of it, we recursively sort that sub array
+		if (iRight>first) DoQuickSort(array,first,iRight);
+		
+		// If the pivot has elements to the right of it, we recursively sort that sub array
+		if (iLeft<last) DoQuickSort(array,iLeft,last);
+	}
+			
+	private static void swap(int[] array, int i, int j) {
+		int tmp = array[i];
+		array[i]=array[j];
+		array[j]=tmp;
+	}
+
+}

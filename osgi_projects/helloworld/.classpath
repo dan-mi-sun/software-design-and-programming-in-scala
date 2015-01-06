@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/felix-framework-4.2.1/bin/felix.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>

@@ -1,0 +1,3 @@
+object ggg {
+  println("Welcome to the Scala work")            //> Welcome to the Scala worksheet
+}

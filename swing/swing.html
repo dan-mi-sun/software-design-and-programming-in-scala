@@ -1,0 +1,129 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Janice T. Searleman">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (Win98; I) [Netscape]">
+   <title>JFrames</title>
+</head>
+<body>
+
+<center><b><font color="#3366FF"><font size=+2>CS242&nbsp;&nbsp; Advanced
+Programming Concepts in Java</font></font></b>
+<br><font size=+1>Fall 2005</font>
+<p><b><u><font size=+1>GUIs and JFrames</font></u></b></center>
+
+<p><b>To create some GUI components and display them in a window:</b>
+<br>&sect; create a Jframe
+<br>&sect; add components to its ContentPane
+<br>&sect; use a layout manager to arrange the components
+<p><b>To display a frame:</b>
+<br>&sect; create the JFrame object w/ call to new
+<br>&sect; optionally position it on the screen (setLocation())
+<br>&sect; optionally give it a size (setSize() or setPreferredSize())
+<br>&sect; optionally give it a title, or other attributes (setTitle(),
+etc.)
+<br>&sect; call the show() method to make the frame visible and to bring
+it to the front if it's behind another window; or just call the setVisible()
+method to make it visible
+<p>
+<hr WIDTH="100%">
+<br><b>To exit the main program when a frame is closed (before Java 1.3):</b>
+<br>&sect; add a window event listener
+<p>The WindowListener interface is defined as follows:<b></b>
+<p><b>public interface WindowListener</b>
+<br><b>extends EventListener</b>
+<br><b>{</b>
+<br><b>&nbsp;&nbsp; public void windowActivated(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowClosed(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowClosing(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowDeactivated(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowDeiconified(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowIconified(WindowEvent e);</b>
+<br><b>&nbsp;&nbsp; public void windowOpened(WindowEvent e);</b>
+<br><b>}</b><b></b>
+<p>So to specify an action to take when a window closed event occurs,
+<br>you could define your JFrame as follows:
+<p><b>class MyFrame</b>
+<br><b>&nbsp;&nbsp; extends JFrame</b>
+<br><b>&nbsp;&nbsp; implements WindowListener</b>
+<br><b>{ ... }</b>
+<p>However, then the MyFrame class would be forced to implement all seven
+methods in the interface, when it only needs to add code to windowClosed().&nbsp;
+To simplify this, an abstract class called an adapter is also available
+in Swing.&nbsp; It looks as follows:
+<p><b>public abstract class WindowAdapter</b>
+<br><b>extends Object</b>
+<br><b>implements WindowListener</b>
+<br><b>{</b>
+<br><b>&nbsp;&nbsp; public void windowActivated(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowClosed(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowClosing(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowDeactivated(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowDeiconified(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowIconified(WindowEvent e) {};</b>
+<br><b>&nbsp;&nbsp; public void windowOpened(WindowEvent e) {};</b>
+<br><b>}</b>
+<p>This abstract class implements all seven methods as stubs.&nbsp; Since
+there is no multiple inheritance, MyFrame cannot extend both JFrame and
+WindowAdapter, so another class must be added.&nbsp; We'll call it Terminator:
+<p>c<b>lass Terminator extends WindowAdapter</b>
+<br><b>{</b>
+<br><b>&nbsp;&nbsp; public void windowClosing(WindowEvent e)</b>
+<br><b>&nbsp;&nbsp; {</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.exit(0);</b>
+<br><b>&nbsp;&nbsp; }</b>
+<br><b>}</b>
+<p>Then, MyFrame can be written as:
+<p><b>class MyFrame</b>
+<br><b>&nbsp;&nbsp; extends JFrame</b>
+<br><b>{</b>
+<br><b>&nbsp;&nbsp; public MyFrame()</b>
+<br><b>&nbsp;&nbsp; {</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // set size, location, etc.</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addWindowListener(new Terminator());</b>
+<br><b>&nbsp;&nbsp; }</b>
+<br><b>}</b>
+<br><b>&nbsp;</b>
+<br>Now, although this works, the class Terminator is used only by MyFrame
+and is only used once.&nbsp; This is not only a good use for an inner class,
+but we really don't even need to name the class.&nbsp; We can essentially
+substitute the body of the terminator code where its name occurs.&nbsp;
+This results in the following line:<b></b>
+<p><b>&nbsp;addWindowListener(new WindowAdapter()</b>
+<br><b>&nbsp;&nbsp; {</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void windowClosing(WindowEvent
+e)</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.exit(0);</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</b>
+<br><b>&nbsp;&nbsp; } );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// anonymous inner class</b><b></b>
+<p>A second simplification we can make to this program will take advantage
+of the default close operation option provided with JFrames in Java 1.3
+(but is not available in version 1.2 or below).
+<p>
+<hr WIDTH="100%">
+<p><b>Examples of all three versions are:</b>
+<ol>
+<li>
+<a href="TestFrame.java">TestFrame.java</a>:&nbsp; This program creates a simple window and makes it
+appear on the screen.&nbsp; One problem is that closing the window does
+not terminate the main program (you must hit &lt;Ctrl>c to terminate the
+main program).</li>
+
+<li>
+<a href="TestCloseableFrame.java">
+TestCloseableFrame.java</a>:&nbsp; Adds a window event listener to the simple frame
+so that the main program exits when the window is closed.</li>
+
+<li>
+<a href="TestCloseableFrameV2.java">
+TestCloseableFrameV2.java</a>:&nbsp; Same as the above, except uses setDefaultCloseOperation()
+and the EXIT_ON_CLOSE option in JFrame.</li>
+</ol>
+
+<hr WIDTH="100%">
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Janice T. Searleman">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (Win98; I) [Netscape]">
+   <title>JFrames</title>
+</head>
+<body>
+
+<center><b><font color="#3366FF"><font size=+2>CS242&nbsp;&nbsp; Advanced
+Programming Concepts in Java</font></font></b>
+<br><font size=+1>Fall 2005</font>
+<p><b><u><font size=+1>Event Delegation Model</font></u></b></center>
+
+<p>&sect; <font size=+1>A listener object is an instance of a class that
+implements a special interface called a "listener interface"</font><font size=+1></font>
+<p><font size=+1>&sect; An event source is an object that can register
+listener objects and send them event objects.</font><font size=+1></font>
+<p><font size=+1>&sect; An eligible listener registers itself with an event
+source by calling an "add listener" method in the event source and passing
+a reference to itself ("callback");&nbsp; multiple listeners can register
+with the same source (multicasting)</font>
+<br><font size=+1></font>&nbsp;
+<blockquote>
+<center><font size=+1><b>eventSourceObject</b>.addEventListener(<b>eventListenerObject</b>);</font></center>
+</blockquote>
+<font size=+1></font>
+<p><br><font size=+1>&sect; The event source sends out event objects to
+all registered listeners when that event occurs.</font><font size=+1></font>
+<p><font size=+1>&sect; The listener objects can use the information in
+the event object to determine their reaction to the event.</font>
+<br><font size=+1></font>&nbsp;
+<p>
+<hr WIDTH="100%">
+<center>
+<p><b><u><font size=+1>How to implement an Event Handler:</font></u></b></center>
+<b><u><font size=+1></font></u></b>
+<ol>
+<li>
+<font size=+1>In the declaration for the event handler class, add code
+that specifies that the class either implements a listener interface or
+extends a class that implements a listener interface
+<p> e.g. <b> public class MyClass implements ActionListener{ ... }</b>
+</font></li>
+
+<p>
+<li>
+<font size=+1>Add code that registers an instance of the event handler
+class as a listener upon one or more components.
+<p> e.g. <b> someComponent.addActionListener(instanceOfMyClass);</b>
+</font></li>
+
+<p>
+<li>
+<font size=+1>Add code that implements the methods in the listener interface.
+<p> e.g. Add the following to class MyClass:
+<p>
+<b> public void actionPerformed(ActionEvent ae)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;// code that reacts to the event
+<br>&nbsp;&nbsp;&nbsp;&nbsp;}
+</b>
+</font></li>
+</ol>
+
+</body>
+</html>
