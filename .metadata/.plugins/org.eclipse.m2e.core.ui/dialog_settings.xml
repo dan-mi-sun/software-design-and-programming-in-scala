@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
+		<item value="480" key="width"/>
+		<item value="719" key="x"/>
+		<item value="248" key="y"/>
+		<item value="450" key="height"/>
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/t3_dictionary_service_client"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/t2_dictionary_service"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/t1_service_event_listener"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/helloworld_maven"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpringWithAutoscan"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpringWithAnnotation"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpringWithDIXMLFileConstructorArgument"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpringWithDIXMLFile"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpringWithDI"/>
+			<item value="/Users/keith/Dropbox/Courses/oodp/2014/code/helloworld_HelloWorldSpring"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+		</list>
+	</section>
+</section>

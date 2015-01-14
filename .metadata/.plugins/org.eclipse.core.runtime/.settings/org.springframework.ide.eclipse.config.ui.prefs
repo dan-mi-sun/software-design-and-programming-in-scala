@@ -1,0 +1,5 @@
+//com.springsource.config.ui.prefs.activePageIndex\:/HelloWorldSpringWithAnnotation/src/main/resources/beans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/HelloWorldSpringWithAutoscan/src/main/resources/beans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/HelloWorldSpringWithDIXMLFile/src/main/resources/beans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/HelloWorldSpringWithDIXMLFileConstructorArgument/src/main/resources/beans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<activePage index\="0"/>
+eclipse.preferences.version=1

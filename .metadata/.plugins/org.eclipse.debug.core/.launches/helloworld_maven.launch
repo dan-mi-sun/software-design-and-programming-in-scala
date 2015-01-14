@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/Users/keith/Dropbox/Courses/oodp/2014/code/osgi_projects/helloworld_maven"/>
+</launchConfiguration>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1391359427694_1" label="DependencyInjection" name="DependencyInjection">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldSpring" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorld" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldDecoupledInterface" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldDecoupledInterfaceWithFactory" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldSpringWithDIXMLFile" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldDecoupled" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldWithCommandLineArguments" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldSpringWithDI" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldSpringWithAnnotation" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/HelloWorldSpringWithDIXMLFileConstructorArgument" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1390421210990_0" label="Window Working Set" name="Aggregate for window 1390421210989"/>
+</workingSetManager>
