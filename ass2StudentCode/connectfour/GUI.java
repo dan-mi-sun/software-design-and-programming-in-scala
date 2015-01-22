@@ -1,0 +1,140 @@
+package connectfour;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.border.BevelBorder;
+
+/**
+ *  NOTHING FOR YOU TO DO HERE.
+ */
+/** An instance is a GUI that can display a Connect Four game. */
+public class GUI extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private GamePanel gamePanel;
+	private JLabel msgLabel;
+	private JButton[] columnButtons;
+	private Game game;
+
+	public static void main(String[] args) {
+		/*
+		 * -------------------------- Change these to play game differently.
+		 *
+		 * p1 is the first player, p2 is the second player. A Solver can be a
+		 * Human, AI, or Dummy. Human and Dummy constructors have a player
+		 * parameter; the AI constructor has a player and depth as parameters,
+		 * with the a depth used to recurse when searching the game space.
+		 */
+		// Solver p1= new AI(Player.RED, 6);
+		// Solver p1 = new Dummy(Player.RED);
+		Solver p1 = new Human(Player.RED);
+		Solver p2 = new Dummy(Player.YELLOW);
+
+		/*
+		 * --------------------------------- 
+		 * Do not change below here.
+		 * ---------------------------------
+		 */
+
+		Game game = new Game(p1, p2);
+		game.setGUI(new GUI(game));
+		game.runGame();
+	}
+
+	/** Constructor: a GUI attached to Game game. */
+	public GUI(Game game) {
+		super("Connect Four AI");
+
+		this.game = game;
+
+		setLayout(new BorderLayout());
+
+		gamePanel = new GamePanel(this, new Board());
+		columnButtons = new JButton[Board.NUM_COLS];
+
+		// Message Panel
+		JPanel msgPanel = new JPanel();
+		msgPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
+		msgPanel.setPreferredSize(new Dimension(getWidth(), 18));
+		msgPanel.setLayout(new GridLayout(1, 4));
+		msgLabel = new JLabel("");
+		msgPanel.add(msgLabel);
+
+		// Toolbar of Column Buttons
+		JToolBar toolbar = setUpToolBar();
+
+		add(toolbar, BorderLayout.NORTH);
+		add(gamePanel, BorderLayout.CENTER);
+		add(msgPanel, BorderLayout.SOUTH);
+
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	/** Set up the action buttons at the top of the board for human interaction. */
+	private JToolBar setUpToolBar() {
+		for (int i = 0; i < columnButtons.length; i++) {
+			columnButtons[i] = new JButton("Column " + i);
+			columnButtons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Object s = e.getSource();
+					for (int i = 0; i < columnButtons.length; i = i + 1) {
+						if (s == columnButtons[i]) {
+							game.columnClicked(i);
+						}
+					}
+				}
+			});
+		}
+
+		JToolBar toolBar = new JToolBar(JToolBar.HORIZONTAL);
+		toolBar.setFloatable(false);
+		toolBar.setRollover(true);
+
+		for (int i = 0; i < columnButtons.length; i = i + 1) {
+			toolBar.add(columnButtons[i]);
+		}
+		return toolBar;
+	}
+
+	/**
+	 * Tell the GUI that the game is over and that winner has won (it's a tie if
+	 * winner = null).
+	 */
+	public void notifyGameOver(Player winner) {
+		if (winner == null) {
+			setMsg("Tie game!");
+		} else {
+			setMsg(winner + " won the game!!!");
+		}
+	}
+
+	/** Display message s at the bottom of the GUI. */
+	public void setMsg(String s) {
+		msgLabel.setText(s);
+	}
+
+	/** Update this GUI to make Move m and display Board b. */
+	public void updateGUI(Board b, Move m) {
+		gamePanel.playColumn(m.getPlayer(), m.getColumn()); // responsible for
+															// animation
+		gamePanel.updateBoard(b); // must be called after (not before)
+									// playColumn
+		repaint();
+	}
+}
