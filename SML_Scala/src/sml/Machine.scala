@@ -1,9 +1,6 @@
 package sml
 
-import java.util.ArrayList
-import Machine._
-
-case class Machine(labels: Vector[String], prog: Vector[Instruction]) {
+case class Machine(labels: Labels, prog: Vector[Instruction]) {
   private final val NUMBEROFREGISTERS = 32
   val regs: Registers = new Registers(NUMBEROFREGISTERS)
 
@@ -23,7 +20,7 @@ object Machine {
     }
     println("SML interpreter - Scala version")
 
-    val m = Translator(args(0)).readAndTranslate(new Machine(Vector(), Vector()))
+    val m = Translator(args(0)).readAndTranslate(new Machine(Labels(), Vector()))
 
     println("Here is the program; it has " + m.prog.size + " instructions.")
     println(m)

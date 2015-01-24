@@ -1,19 +1,18 @@
 package sml
 
 class Translator(fileName: String) {
-  private var labels: Vector[String] = Vector()
-  private var program: Vector[Instruction] = Vector()
-
   private final val ADD = "add"
   private final val LIN = "lin"
 
   def readAndTranslate(m: Machine): Machine = {
+    var labels = m.labels
+    var program = m.prog
     import scala.io.Source
     val lines = Source.fromFile(fileName).getLines
     for (line <- lines) {
       var fields = line.split(" ")
       if (fields.length > 0) {
-        labels = labels :+ fields(0)
+        labels.add(fields(0))
         fields(1) match {
           case ADD =>
             program = program :+ AddInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
@@ -29,8 +28,8 @@ class Translator(fileName: String) {
 }
 
 object Translator {
-  private val fileName: String = "src/"
+  private val directory: String = "src/"
 
   def apply(file: String) =
-    new Translator(fileName + file)
+    new Translator(directory + file)
 }
