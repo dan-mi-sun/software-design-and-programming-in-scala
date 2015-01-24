@@ -1,69 +1,36 @@
 package sml
 
-class Translator(fileName: String) {  
-  private var line: String = ""
-  private var labels: Labels = _
-  private var program: Vector[Instruction] = _
-  
-    def readAndTranslate(m: Machine): Boolean = {
+class Translator(fileName: String) {
+  private var labels: Vector[String] = Vector()
+  private var program: Vector[Instruction] = Vector()
+
+  private final val ADD = "add"
+  private final val LIN = "lin"
+
+  def readAndTranslate(m: Machine): Machine = {
     import scala.io.Source
-    val stream = Source.fromFile(fileName)
-    for (lines <- stream.getLines){
-      var fields = lines.split(" ")
-          if (fields.length > 0) {
-            val ins = getInstruction(label)
-            if (ins != null) {
-              labels.addLabel(label)
-              program :+ ins
-            }
-          }
-          try {
-            line = sc.nextLine()
-          } catch {
-            case ioE: NoSuchElementException => return false
-          }
+    val lines = Source.fromFile(fileName).getLines
+    for (line <- lines) {
+      var fields = line.split(" ")
+      if (fields.length > 0) {
+        labels = labels :+ fields(0)
+        fields(1) match {
+          case ADD =>
+            program = program :+ AddInstruction(fields(0), fields(2).toInt, fields(3).toInt, fields(4).toInt)
+          case LIN =>
+            program = program :+ LinInstruction(fields(0), fields(2).toInt, fields(3).toInt)
+          case x =>
+            println(s"Unknown instruction $x")
         }
       }
-    } catch {
-      case ioE: IOException => {
-        println("File: IO error " + ioE.getMessage)
-        return false
-      }
     }
-    true
-  }
-
-  def getInstruction(label: String): Instruction = {
-    var s1: Int = 0
-    var s2: Int = 0
-    var r: Int = 0
-    val x: Int = 0
-    if (line == "") return null
-    val ins = scan()
-    ins match {
-      case "add" => 
-        r = scanInt()
-        s1 = scanInt()
-        s2 = scanInt()
-        return new AddInstruction(label, r, s1, s2)
-
-      case "lin" => 
-        r = scanInt()
-        s1 = scanInt()
-        return new LinInstruction(label, r, s1)
-
-    }
-    null
+    new Machine(labels, program)
   }
 }
-
 
 object Translator {
   private val fileName: String = "src/"
 
   def apply(file: String) =
     new Translator(fileName + file)
-} 
-
-
-
+}

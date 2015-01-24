@@ -1,27 +1,11 @@
 package sml
 
-import Registers._
-//remove if not needed
-import scala.collection.JavaConversions._
+case class Registers(size: Int) {
+  val registers: Array[Int] = new Array(size)
 
-object Registers {
+  override def toString(): String =
+    registers.mkString(" ")
 
-  private val NUMBEROFREGISTERS = 32
-}
-
-class Registers {
-
-  private var registers: Int = new Int(NUMBEROFREGISTERS)
-
-  var i = 0
-  while (i != registers.length) {
-    registers(i) = 0
-    i += 1
-  }
-
-  def setRegister(i: Int, v: Int) {
-    registers(i) = v
-  }
-
-  def getRegister(i: Int): Int = registers(i)
+  def update(k: Int, v: Int) = registers(k) = v
+  def apply(k: Int) = registers(k)
 }

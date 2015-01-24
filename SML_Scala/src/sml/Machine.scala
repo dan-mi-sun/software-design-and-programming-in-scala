@@ -3,43 +3,34 @@ package sml
 import java.util.ArrayList
 import Machine._
 
-object Machine {
-  def main(args: Array[String]) {
-    val m = Translator(args(0)).readAndTranslate(new Machine())
-    println("Here is the program; it has " + m.prog.size + " instructions.")
-    println(m)
-    println("Beginning program execution.")
-    m.execute()
-    println("Ending program execution.")
-    println("Values of registers at program termination:")
-    println(m.registers + ".")
-  }
-}
-
-case class Machine() {
-
-  private var labels: Labels = new Labels()
-
-  private var prog: Vector[Instruction] = Vector()
-
-  private var registers: Registers = _
-
-  private var pc: Int = 0
+case class Machine(labels: Vector[String], prog: Vector[Instruction]) {
+  private final val NUMBEROFREGISTERS = 32
+  val regs: Registers = new Registers(NUMBEROFREGISTERS)
 
   override def toString(): String = {
-    val s = new StringBuffer()
-    var i = 0
     prog.foldLeft("")(_ + _)
   }
 
-  def execute() {
-    pc = 0
-    registers = new Registers()
-    while (pc < prog.size) {
-      val ins = prog(pc)
-      pc += 1
-      ins execute this
-    }
-  }
+  def execute(start: Int) =
+    Range(start, prog.length).foreach(x => prog(x) execute this)
 }
 
+object Machine {
+  def main(args: Array[String]) {
+    if (args.length == 0) {
+      println("Machine: args should be sml code file to execute")
+      return
+    }
+    println("SML interpreter - Scala version")
+
+    val m = Translator(args(0)).readAndTranslate(new Machine(Vector(), Vector()))
+
+    println("Here is the program; it has " + m.prog.size + " instructions.")
+    println(m)
+    println("Beginning program execution.")
+    m.execute(0)
+    println("Ending program execution.")
+    println("Values of registers at program termination:")
+    println(m.regs + ".")
+  }
+}
