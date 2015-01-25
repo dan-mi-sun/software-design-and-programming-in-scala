@@ -9,7 +9,7 @@ case class Machine(labels: Labels, prog: Vector[Instruction]) {
   }
 
   def execute(start: Int) =
-    Range(start, prog.length).foreach(x => prog(x) execute this)
+    start.until(prog.length).foreach(x => prog(x) execute this)
 }
 
 object Machine {
