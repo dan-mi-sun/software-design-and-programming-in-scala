@@ -1,4 +1,0 @@
-object First {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
-	3 + 4                                     //> res0: Int(7) = 7
-}
