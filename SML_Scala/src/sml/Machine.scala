@@ -12,12 +12,10 @@ case class Machine(labels: Labels, prog: Vector[Instruction]) {
     start.until(prog.length).foreach(x => prog(x) execute this)
 }
 
-object Machine {
-  def main(args: Array[String]) {
-    if (args.length == 0) {
-      println("Machine: args should be sml code file to execute")
-      return
-    }
+object Machine extends App {
+  if (args.length == 0) {
+    println("Machine: args should be sml code file to execute")
+  } else {
     println("SML interpreter - Scala version")
 
     val m = Translator(args(0)).readAndTranslate(new Machine(Labels(), Vector()))
