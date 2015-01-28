@@ -1,14 +1,14 @@
 package algebraic
 
-//case class A(b: B, c: C)
+//case class Car(w: Wheels, e: Engine)
 
-trait B
+trait Wheels
 
-trait C
+trait Engine
 
-trait A {
-  def b: B
-  def c: C
+trait Car {
+  def w: Wheels
+  def e: Engine
 }
 
 // ========================= has-a AND pattern PRODUCT type

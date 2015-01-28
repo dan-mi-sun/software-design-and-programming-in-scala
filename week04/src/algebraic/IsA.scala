@@ -1,10 +1,10 @@
 package algebraic
 
-// if Aa is a Ba or Ca
+// if Vehicle is a Bike or Car
 
-sealed trait Aa 
-final case class Ba() extends Aa
-final case class Ca() extends Aa
+sealed trait Vehicle
+final case class Bike() extends Vehicle
+final case class Car() extends Vehicle
 
 
 // =========================== Is-a OR pattern SUM type
@@ -15,28 +15,22 @@ IS-A    Cake              Sum type
 HAS-A   Product type      ???
 */
 
-// Aaa is a Baa and Caa
+// Huly is a Fly and Human
 
-trait Baa
-trait Caa
-trait Aaa extends Baa with Caa // with xxx
+trait Human
+trait Fly
+trait Huly extends Human with Fly // with xxx
 
 // Cake Pattern
 
 // "has-a or" pattern
-// A has a B or C
-// A has a d of type D, where D is B or C
+// Person has a RealHand or ArtificialLimb
+// Person has a h of type Hand, where Hand is RealHand or ArtificialLimb
 
-trait Ax {
-  def d: D
+trait Person {
+  def h: Hand
 }
 
-sealed trait D
-final case class Bx() extends D
-final case class Cx() extends D
-
-// A is a D or E -> D has a B and E has C
-
-sealed trait Axx
-final case class Dx(b: Baa) extends Axx
-final case class Ex(c: Caa) extends Axx
+sealed trait Hand
+final case class RealHand() extends Hand
+final case class ArtificialLimb() extends Hand

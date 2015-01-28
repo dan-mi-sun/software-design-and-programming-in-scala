@@ -1,15 +1,15 @@
 package structural.pm
 
-trait B
+trait Engine
 
-trait C
+trait Doors
 
-case class A(b: B, c: C)
+case class Car(e: Engine, d: Doors)
 
 object Poly {
-  def foo(a: A) =
-    a match {
-      case A(b, c) => ???
+  def foo(c: Car) =
+    c match {
+      case Car(e, d) => ???
     }
 }
 

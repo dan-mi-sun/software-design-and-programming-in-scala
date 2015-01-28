@@ -6,7 +6,9 @@ sealed trait Shape {
   // perimeter
   // area
   def sides: Int
+
   def perimeter: Double
+
   def area: Double
 }
 
@@ -14,22 +16,24 @@ sealed trait Shape {
 // math.Pi
 
 case class Circle(radius: Double) extends Shape {
-  val sides = 1
-  val perimeter = 2 * math.Pi * radius
-  val area = math.Pi * radius * radius
+  override val sides = 1
+  override val perimeter = 2 * math.Pi * radius
+  override val area = math.Pi * radius * radius
 }
 
 trait Rectangular extends Shape {
   def width: Double
+
   def height: Double
-  val sides = 4
-  val perimeter = 2 * width + 2 * height
-  val area = width * height
+
+  override val sides = 4
+  override val perimeter = 2 * width + 2 * height
+  override val area = width * height
 }
 
 case class Square(size: Double) extends Rectangular {
-  val width = size
-  val height = size
+  override val width = size
+  override val height = size
 }
 
 case class Rectangle(width: Double, height: Double) extends Rectangular
@@ -40,9 +44,9 @@ case class Rectangle(width: Double, height: Double) extends Rectangular
 object Draw {
   def apply(s: Shape) =
     s match {
-    case Rectangle(width,height) => println(s"A rectangle with width ${width}")
-    case Square(size) => println(s"A square with side ${size}")
-    case Circle(radius) => println(s"A circle with radius ${radius}")
-    case _ => println("Some other shape")
-  }
+      case Rectangle(width, height) => println(s"A rectangle with width ${width}")
+      case Square(size) => println(s"A square with side ${size}")
+      case Circle(radius) => println(s"A circle with radius ${radius}")
+      case _ => println("Some other shape")
+    }
 }

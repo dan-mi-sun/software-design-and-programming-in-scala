@@ -1,13 +1,15 @@
 package structural.pm
 
-sealed trait Aa
-case class Ba() extends Aa
-case class Ca() extends Aa
+sealed trait Person
+
+case class Student() extends Person
+
+case class Academic() extends Person
 
 object PolySum {
-  def f(a: Aa) =
-    a match {
-      case Ba() => ???
-      case Ca() => ???
+  def f(p: Person) =
+    p match {
+      case Student() => ???
+      case Academic() => ???
     }
 }
