@@ -6,7 +6,6 @@ sealed trait Vehicle
 final case class Bike() extends Vehicle
 final case class Car() extends Vehicle
 
-
 // =========================== Is-a OR pattern SUM type
 
 /*
