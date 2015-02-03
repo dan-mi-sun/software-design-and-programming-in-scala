@@ -5,12 +5,12 @@ class Translator(fileName: String) {
   private final val LIN = "lin"
 
   def readAndTranslate(m: Machine): Machine = {
-    var labels = m.labels
+    val labels = m.labels
     var program = m.prog
     import scala.io.Source
     val lines = Source.fromFile(fileName).getLines
     for (line <- lines) {
-      var fields = line.split(" ")
+      val fields = line.split(" ")
       if (fields.length > 0) {
         labels.add(fields(0))
         fields(1) match {
