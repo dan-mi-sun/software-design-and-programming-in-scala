@@ -1,3 +1,4 @@
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Color;
@@ -60,9 +61,8 @@ public class GamePanel extends JPanel {
         this.window = window;
 
         board = new Board(b);
-
-        width = Board.NUM_COLS * cellSize + (Board.NUM_COLS + 1) * sepSize;
-        height = Board.NUM_ROWS * cellSize + (Board.NUM_ROWS + 1) * sepSize;
+        width = Board.NUM_COLS() * cellSize + (Board.NUM_COLS() + 1) * sepSize;
+        height = Board.NUM_ROWS() * cellSize + (Board.NUM_ROWS() + 1) * sepSize;
         waitSema = new Semaphore(0);
 
     }
@@ -77,7 +77,7 @@ public class GamePanel extends JPanel {
         animation = true;
 
         stopRow = 0; //the first occurrence of a non-null tile
-        while (!(stopRow >= Board.NUM_ROWS || board.getTile(stopRow, colIndex) != null)) {
+        while (!(stopRow >= Board.NUM_ROWS() || board.getTile(stopRow, colIndex) != null)) {
             stopRow++;
         }
 
@@ -106,7 +106,7 @@ public class GamePanel extends JPanel {
      */
     public void playColumn(Player p, int col) {
         window.setMsg("Run playColumn with column " + col + ".");
-        animationColor = p == Player.YELLOW ? yellowColor : redColor;
+        animationColor = p == YELLOW ? yellowColor : redColor;
         startAnimation(col);
         try {
             waitSema.acquire();
@@ -155,23 +155,23 @@ public class GamePanel extends JPanel {
         //Draw the lines.
         g2d.setColor(sepColor);
         //Draw the horizontal lines.
-        for (int y = 0, i = 0; i <= Board.NUM_ROWS; i = i + 1) {
+        for (int y = 0, i = 0; i <= Board.NUM_ROWS(); i = i + 1) {
             g2d.fillRect(0, y, width, sepSize);
             y = y + sepSize + cellSize;
         }
         //Draw the vertical lines;
-        for (int x = 0, i = 0; i <= Board.NUM_COLS; i = i + 1) {
+        for (int x = 0, i = 0; i <= Board.NUM_COLS(); i = i + 1) {
             g2d.fillRect(x, 0, sepSize, height);
             x = x + sepSize + cellSize;
         }
 
         //Paint occupied tiles
-        for (int x = sepSize, i = 0; i < Board.NUM_COLS; i++) {
-            for (int y = sepSize, j = 0; j < Board.NUM_ROWS; j++) {
-                if (board.getTile(j, i) == Player.YELLOW) {
+        for (int x = sepSize, i = 0; i < Board.NUM_COLS(); i++) {
+            for (int y = sepSize, j = 0; j < Board.NUM_ROWS(); j++) {
+                if (board.getTile(j, i) == YELLOW) {
                     g2d.setColor(yellowColor);
                     g2d.fillOval(x, y, cellSize, cellSize);
-                } else if (board.getTile(j, i) == Player.RED) {
+                } else if (board.getTile(j, i) == RED) {
                     g2d.setColor(redColor);
                     g2d.fillOval(x, y, cellSize, cellSize);
                 } else {
