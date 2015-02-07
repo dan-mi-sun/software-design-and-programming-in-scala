@@ -1,3 +1,4 @@
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,37 +18,16 @@ import java.awt.GridLayout;
  */
 public class GUI extends JFrame {
 
-    private GamePanel gamePanel;
+	private static final long serialVersionUID = 1L;
+	private GamePanel gamePanel;
     private JLabel msgLabel;
     private JButton[] columnButtons;
     private Game game;
 
-    public static void main(String[] args) {
-        /* -------------------------- Change these to play game differently. -------------------------- */
-
-        /* p1 is the first player, p2 is the second player. A Solver
-         * can be a Human, AI, or Dummy. Human and Dummy constructors have
-         * a player parameter; the AI constructor has a player and depth
-         * as parameters, with the a depth used to recurse when searching the
-         * game space. */
-        //Solver p1= new AI(Player.RED, 6);
-        //Solver p2= new Human(Player.YELLOW);
-        Solver p1 = new Dummy(Player.RED);
-        Solver p2 = new Dummy(Player.YELLOW);
-        //Solver p1 = new Human(Player.RED);
-        //Solver p2 = new Dummy(Player.YELLOW);
-
-        /* --------------------------------- Do not change below here. --------------------------------- */
-
-        Game game = new Game(p1, p2);
-        game.setGUI(new GUI(game));
-        game.runGame();
-    }
-
     /**
      * Constructor: a GUI attached to Game game.
      */
-    public GUI(Game game) {
+    public GUI(Game game, int NUM_COLS, int NUN_ROWS) {
         super("Connect Four AI");
 
         this.game = game;
@@ -55,7 +35,7 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout());
 
         gamePanel = new GamePanel(this, new Board());
-        columnButtons = new JButton[Board.NUM_COLS];
+        columnButtons = new JButton[NUM_COLS];
 
         //Message Panel
         JPanel msgPanel = new JPanel();
@@ -122,7 +102,7 @@ public class GUI extends JFrame {
      * Update this GUI to make Move m and display Board b.
      */
     public void updateGUI(Board b, Move m) {
-        gamePanel.playColumn(m.getPlayer(), m.getColumn()); // responsible for animation
+        gamePanel.playColumn(m.player(), m.column()); // responsible for animation
         gamePanel.updateBoard(b); // must be called after (not before) playColumn
         repaint();
     }
