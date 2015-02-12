@@ -22,7 +22,7 @@ object Polymorphic extends App {
     helper(0)
   }
 
-  def isSorted[T <% Comparable[T]](as: Array[T], gt: (T, T) => Boolean): Boolean = {
+  def isSorted[T](as: Array[T], gt: (T, T) => Boolean)(implicit x: T => Comparable[T]) : Boolean = {
     // Hint: The array is not sorted if you encounter two adjacent
     // elements for which ord(first,second) returns false
     // depending on your function
@@ -40,6 +40,6 @@ object Polymorphic extends App {
   //println(findFirst(Array("1", "23", "4", "5", "6"), "6"))
   //println(findFirst(Array(1, 23, 4, 5, 6), 5))
 
-  println(isSorted(Array(1,2,3,5,6,1),(a:Int,b:Int) => a > b))
+  println(isSorted(Array(1,2,3,5,6,1),(a:Int, b) => a > b))
 
 }
