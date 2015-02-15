@@ -1,3 +1,5 @@
+import scala.collection.mutable.ListBuffer
+
 object Board {
   val NUM_ROWS = 6
   val NUM_COLS = 7
@@ -33,9 +35,22 @@ class Board {
 
   def getTile(row: Int, col: Int): Player = board(row)(col)
 
-  def makeMove(move: Move): Unit = ???
+  def makeMove(move: Move): Unit = {
+    var r = Board.NUM_ROWS - 1
 
-  def getPossibleMoves(p: Player): Array[Move] = null
+
+    val c = move.column
+
+    while (getTile(r, c) != null) {
+
+      r = r - 1
+
+    }
+
+    board(r)(c) = move.player
+  }
+
+  def getPossibleMoves(p: Player): Array[Move] = ???
 
   override def toString(): String = toString("")
 
@@ -61,18 +76,18 @@ class Board {
     winLocations().find(loc => loc(0) != null && loc(0) == loc(1) && loc(0) == loc(2) &&
       loc(0) == loc(3))
       .map(_(0))
-      .getOrElse(null)
+      .orNull
   }
 
   def winLocations(): List[Array[Player]] = {
-    val locations = List[Array[Player]]()
+    val locations = ListBuffer[Array[Player]]()
     for (delta <- deltas; r <- 0 until Board.NUM_ROWS; c <- 0 until Board.NUM_COLS) {
       val loc = possibleWin(r, c, delta)
       if (loc != null) {
-        locations :+ loc
+        locations += loc
       }
     }
-    locations
+    locations.toList
   }
 
   def possibleWin(r: Int, c: Int, delta: Array[Int]): Array[Player] = {
