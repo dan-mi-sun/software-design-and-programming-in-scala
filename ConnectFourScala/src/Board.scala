@@ -33,8 +33,7 @@ class Board {
 
   def getTile(row: Int, col: Int): Player = board(row)(col)
 
-  def makeMove(move: Move) {
-  }
+  def makeMove(move: Move): Unit = ???
 
   def getPossibleMoves(p: Player): Array[Move] = null
 

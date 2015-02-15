@@ -167,7 +167,7 @@ public class Board {
      * If the four locations in a row beginning in board[r][c] going in the direction
      * given by [delta[0]][delta[1]] are on the board, return an array of them.
      * Otherwise, return null;
-     *
+     * <p/>
      * Precondition: board[r][c] is on the board and delta is one of the elements of
      * static variable deltas.
      */
