@@ -82,8 +82,8 @@ public class Board {
      */
     public void makeMove(Move move) {
         // TODO
-        //Delete the following code once you've decided to start implementing
-//        throw new UnsupportedOperationException("You need to implement makeMove before running the game.");
+        // Delete the following code once you've decided to start implementing
+        // throw new UnsupportedOperationException("You need to implement makeMove before running the game.");
     }
 
     /**
