@@ -1,18 +1,3 @@
-import java.util.List
-import AI._
-//remove if not needed
-import scala.collection.JavaConversions._
-
-object AI {
-
-  def createGameTree(s: State, d: Int) {
-  }
-
-  def minimax(ai: AI, s: State) {
-    ai.minimax(s)
-  }
-}
-
 class AI(private var player: Player, private var depth: Int) extends Solver {
 
   override def getMoves(b: Board): Array[Move] = ???
@@ -23,7 +8,7 @@ class AI(private var player: Player, private var depth: Int) extends Solver {
   def evaluateBoard(b: Board): Int = {
     val winner = b.hasConnectFour()
     var value = 0
-    if (winner == null) {
+    if (!winner.isDefined) {
       val locs = b.winLocations()
       for (loc <- locs; p <- loc) {
         value += (if (p == player) 1 else if (p != null) -1 else 0)
@@ -39,9 +24,19 @@ class AI(private var player: Player, private var depth: Int) extends Solver {
         }
         r = r + 1
       }
-      value = (if (winner == player) 1 else -1) * 10000 * numEmpty
+      value = (if (winner.get == player) 1 else -1) * 10000 * numEmpty
     }
     value
+  }
+}
+
+object AI {
+
+  def createGameTree(s: State, d: Int) {
+  }
+
+  def minimax(ai: AI, s: State) {
+    ai.minimax(s)
   }
 }
 

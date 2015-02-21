@@ -1,13 +1,5 @@
 import scala.collection.mutable.ListBuffer
 
-object Board {
-  val NUM_ROWS = 6
-  val NUM_COLS = 7
-
-  def apply(b: Board) =
-    new Board(b)
-}
-
 class Board {
 
   private val FOUR = 4
@@ -18,9 +10,8 @@ class Board {
 
   def this(b: Board) {
     this()
-    for (r <- 0 until Board.NUM_ROWS; c <- 0 until Board.NUM_COLS) {
+    for (r <- 0 until Board.NUM_ROWS; c <- 0 until Board.NUM_COLS)
       board(r)(c) = b.board(r)(c)
-    }
   }
 
   def getPlayer(r: Int, c: Int): Player = {
@@ -33,13 +24,13 @@ class Board {
     makeMove(nextMove)
   }
 
-  def getTile(row: Int, col: Int): Player = board(row)(col)
-
   def makeMove(move: Move): Unit = ???
+
+  def getTile(row: Int, col: Int): Player = board(row)(col)
 
   def getPossibleMoves(p: Player): Array[Move] = ???
 
-  override def toString(): String = toString("")
+  override def toString(): String = ???
 
   def toString(prefix: String): String = {
     val str = new StringBuilder("")
@@ -59,11 +50,11 @@ class Board {
     str.toString
   }
 
-  def hasConnectFour(): Player = {
+  def hasConnectFour(): Option[Player] = {
     winLocations().find(loc => loc(0) != null && loc(0) == loc(1) && loc(0) == loc(2) &&
       loc(0) == loc(3))
       .map(_(0))
-      .orNull
+      .orElse(None)
   }
 
   def winLocations(): List[Array[Player]] = {
@@ -82,9 +73,21 @@ class Board {
     for (i <- 0 until FOUR) {
       val newR = r + i * delta(0)
       val newC = c + i * delta(1)
-      if (0 <= newR && newR < Board.NUM_ROWS && 0 <= newC && newC < Board.NUM_COLS)
+      if (0 <= newR && newR < Board.NUM_ROWS && 0 <= newC && newC < Board.NUM_COLS) {
         location(i) = board(newR)(newC)
+      }
     }
     location
   }
+}
+
+object Board {
+  val NUM_ROWS = 6
+  val NUM_COLS = 7
+
+  def apply(b: Board): Board =
+    new Board(b)
+
+  def apply(): Board =
+    new Board()
 }
