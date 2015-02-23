@@ -1,4 +1,3 @@
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +15,7 @@ import java.awt.GridLayout;
 /**
  * An instance is a GUI that can display a Connect Four game.
  */
+
 public class GUI extends JFrame {
 
     private static final long serialVersionUID = 1L;

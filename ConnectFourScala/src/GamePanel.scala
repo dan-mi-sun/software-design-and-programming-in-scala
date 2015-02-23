@@ -16,20 +16,27 @@ class GamePanel(private var window: GUI, b: Board) extends JPanel {
   private val sepSize = 3
   private val wid: Int = Board.NUM_COLS * cellSize + (Board.NUM_COLS + 1) * sepSize
   private val hght: Int = Board.NUM_ROWS * cellSize + (Board.NUM_ROWS + 1) * sepSize
-
+  private val waitSema: Semaphore = new Semaphore(0)
+  private val animDelay = 75
   @BeanProperty
   var board = Board(b)
-
-  private val waitSema: Semaphore = new Semaphore(0)
-  private var timer: Timer = _
-
   var animation: Boolean = _
-
+  private var timer: Timer = _
   private var animationColor: Color = _
-  private val animDelay = 75
   private var colIndex: Int = _
   private var rowIndex: Int = _
   private var stopRow: Int = _
+
+  def playColumn(p: Player, col: Int) {
+    window.setMsg("Run playColumn with column " + col + ".")
+    animationColor = if (p == YELLOW) yellowColor else redColor
+    startAnimation(col)
+    try {
+      waitSema.acquire()
+    } catch {
+      case e: InterruptedException => e.printStackTrace()
+    }
+  }
 
   private def startAnimation(col: Int) {
     colIndex = col
@@ -58,17 +65,6 @@ class GamePanel(private var window: GUI, b: Board) extends JPanel {
 
     timer = new Timer(animDelay, taskPerformer)
     timer.start()
-  }
-
-  def playColumn(p: Player, col: Int) {
-    window.setMsg("Run playColumn with column " + col + ".")
-    animationColor = if (p == YELLOW) yellowColor else redColor
-    startAnimation(col)
-    try {
-      waitSema.acquire()
-    } catch {
-      case e: InterruptedException => e.printStackTrace()
-    }
   }
 
   def updateBoard(b: Board) {
