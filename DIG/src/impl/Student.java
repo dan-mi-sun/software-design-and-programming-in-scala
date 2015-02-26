@@ -9,8 +9,7 @@ public class Student {
     private String major;
     private Integer year;
 
-    public Student() {
-    }
+    public Student() {}
 
     public Student(Integer id, Integer credits) {
         this.id = id;

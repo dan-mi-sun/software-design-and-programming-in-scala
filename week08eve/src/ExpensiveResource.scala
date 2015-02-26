@@ -1,6 +1,11 @@
-/**
- * Created by keith on 26/02/2015.
- */
-object ExpensiveResource {
+object ExpensiveResource extends App {
+  lazy val resource: Int = init()
 
+  def init(): Int = {
+    // do something expensive
+    println("Ouch!")
+    0
+  }
+
+  //println(resource)
 }
