@@ -17,12 +17,14 @@ class State(@BeanProperty var player: Player, @BeanProperty var board: Board, @B
   }
 
   def writeToFile() {
+    var writer: PrintWriter = _
     try {
-      val writer = new PrintWriter("output.txt", "UTF-8")
+      writer = new PrintWriter("output.txt", "UTF-8")
       writer.println(this)
-      java.awt.Toolkit.getDefaultToolkit.beep()
     } catch {
       case e@(_: FileNotFoundException | _: UnsupportedEncodingException) => e.printStackTrace()
+    } finally {
+      writer.close();
     }
   }
 

@@ -18,6 +18,7 @@ class GamePanel(private var window: GUI, b: Board) extends JPanel {
   private val hght: Int = Board.NUM_ROWS * cellSize + (Board.NUM_ROWS + 1) * sepSize
   private val waitSema: Semaphore = new Semaphore(0)
   private val animDelay = 75
+
   @BeanProperty
   var board = Board(b)
   var animation: Boolean = _
