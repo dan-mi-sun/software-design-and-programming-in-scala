@@ -1,0 +1,16 @@
+org/cdi/advocacy/SuperFastAtmTransport.class
+org/cdi/advocacy/ATMTransport.class
+org/cdi/advocacy/Soap.class
+org/cdi/advocacy/Transport.class
+org/cdi/advocacy/TransportFactory.class
+org/cdi/advocacy/AutomatedTellerMachineImpl.class
+org/cdi/advocacy/AutomatedTellerMachine.class
+org/cdi/advocacy/StandardAtmTransport.class
+org/cdi/advocacy/Json.class
+org/cdi/advocacy/StandardFrameRelaySwitchingFlubber.class
+org/cdi/advocacy/SoapAtmTransport.class
+org/cdi/advocacy/TransportConfig.class
+org/cdi/advocacy/AtmMain.class
+org/cdi/advocacy/JsonRestAtmTransport.class
+org/cdi/advocacy/SuperFast.class
+org/cdi/advocacy/TransportType.class
