@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="guice-3-2">
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/aopalliance.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/javax.inject.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-jmx-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-jndi-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-spring-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-grapher-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-persist-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-servlet-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-multibindings-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-assistedinject-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-struts2-plugin-3.0.jar" />
+    <archive path="/Users/keith/Dropbox/Courses/sdp/2015/code/lib/guice-3-2.0/guice-throwingproviders-3.0.jar" />
+  </library>
+  <library name="scala-sdk-2.11.5 (2)">
+    <archive path="/Users/keith/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar" />
+    <archive path="/Users/keith/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.5.jar" />
+  </library>
+</eclipse-userlibraries>
+
