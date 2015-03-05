@@ -1,4 +1,4 @@
-package Composite;
+package composite;
 
 import java.util.List;
 

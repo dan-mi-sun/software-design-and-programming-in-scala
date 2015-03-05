@@ -1,4 +1,4 @@
-package Observer;
+package observer;
 
 public class PersonProxy implements PersonInterface {
 

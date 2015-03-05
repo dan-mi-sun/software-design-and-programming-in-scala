@@ -1,4 +1,4 @@
-package Decorator;
+package decorator;
 
 public class DVD extends Product {
     private String mTitle;

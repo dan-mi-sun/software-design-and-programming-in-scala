@@ -1,4 +1,4 @@
-package Decorator;
+package decorator;
 
 
 public abstract class Product {

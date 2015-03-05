@@ -1,4 +1,4 @@
-package Strategy;
+package strategy;
 
 /**
  * An interface used via the Strategy pattern to allow

@@ -1,4 +1,4 @@
-package Proxy;
+package proxy;
 
 public class PersonProxy implements PersonInterface {
 
