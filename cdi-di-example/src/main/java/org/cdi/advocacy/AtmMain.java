@@ -1,17 +1,18 @@
 package org.cdi.advocacy;
 
+import org.jboss.weld.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+
 import java.math.BigDecimal;
-
-import org.cdisource.beancontainer.BeanContainer;
-import org.cdisource.beancontainer.BeanContainerManager;
-
 
 public class AtmMain {
 
-	static BeanContainer beanContainer =  BeanContainerManager.getInstance();
+	//static BeanContainer beanContainer =  BeanContainerManager.getInstance();
 
 	public static void main(String[] args) throws Exception {
-		AutomatedTellerMachine atm = (AutomatedTellerMachine) beanContainer
+        Weld weld = new Weld();
+        WeldContainer wc =weld.
+        AutomatedTellerMachine atm = (AutomatedTellerMachine) beanContainer
 				.getBeanByName("atm");
 
 		//AutomatedTellerMachine atm = beanContainer.getBeanByType(AutomatedTellerMachine.class);

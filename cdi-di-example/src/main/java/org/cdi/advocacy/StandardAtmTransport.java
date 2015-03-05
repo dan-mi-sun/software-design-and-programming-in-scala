@@ -4,7 +4,8 @@ import javax.enterprise.inject.Default;
 
 //@Transport(type=TransportType.STANDARD)
 
-@StandardFrameRelaySwitchingFlubber @Default
+//@StandardFrameRelaySwitchingFlubber
+@Default
 public class StandardAtmTransport implements ATMTransport {
 	
 	private int retries;
