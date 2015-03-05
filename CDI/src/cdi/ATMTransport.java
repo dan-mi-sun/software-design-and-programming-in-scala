@@ -4,21 +4,21 @@ interface ATMTransport {
     public void communicateWithBank(byte[] dispatch);
 }
 
-class StandardATMTransport implements mydi.ATMTransport {
+class StandardATMTransport implements ATMTransport {
     @Override
     public void communicateWithBank(byte[] dispatch) {
         System.out.println("Communicating with bank " + this.getClass());
     }
 }
 
-class SOAPATMTransport implements mydi.ATMTransport {
+class SOAPATMTransport implements ATMTransport {
     @Override
     public void communicateWithBank(byte[] dispatch) {
         System.out.println("Communicating with bank " + this.getClass());
     }
 }
 
-class RESTATMTransport implements mydi.ATMTransport {
+class RESTATMTransport implements ATMTransport {
     @Override
     public void communicateWithBank(byte[] dispatch) {
         System.out.println("Communicating with bank " + this.getClass());
