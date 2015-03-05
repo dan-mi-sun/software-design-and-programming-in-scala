@@ -1,5 +1,8 @@
 package abstractfactory;
 
-public class BMWWindow extends CarWindow {
-
+public class BMWWindow implements CarWindow {
+    @Override
+    public String toString() {
+        return getClass().toString();
+    }
 }

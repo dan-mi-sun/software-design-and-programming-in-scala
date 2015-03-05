@@ -6,7 +6,7 @@ public class MergeSort implements Sorter {
     @Override
     public void Sort(int[] array) {
         // TODO Auto-generated method stub
-        int r[] = DoMergeSort(array, 0, array.length - 1);
+        int r[] = doMergeSort(array, 0, array.length - 1);
 
         for (int i = 0; i < array.length; i++) {
             array[i] = r[i];
@@ -20,7 +20,7 @@ public class MergeSort implements Sorter {
      * efficient (that's left as an exercise in the notes).
      * OOP course: Why is it private and static?
      */
-    private static int[] DoMergeSort(int[] array, int l, int r) {
+    private static int[] doMergeSort(int[] array, int l, int r) {
 
         if (l == r) {
             //  Only one element, so it's sorted!
@@ -33,11 +33,11 @@ public class MergeSort implements Sorter {
         int c = (int) Math.ceil((r - l + 1) / 2.0);
 
         // Recursively sort the two halves
-        int[] a1 = DoMergeSort(array, l, l + c - 1);
-        int[] a2 = DoMergeSort(array, l + c, r);
+        int[] a1 = doMergeSort(array, l, l + c - 1);
+        int[] a2 = doMergeSort(array, l + c, r);
 
         // Merge the results together
-        return DoMerge(a1, a2);
+        return doMerge(a1, a2);
     }
 
     /**
@@ -48,7 +48,7 @@ public class MergeSort implements Sorter {
      * @param a2 second input array (sorted)
      * @return merged array (sorted)
      */
-    private static int[] DoMerge(int[] a1, int[] a2) {
+    private static int[] doMerge(int[] a1, int[] a2) {
         int[] result = new int[a1.length + a2.length];
 
         int i1 = 0;

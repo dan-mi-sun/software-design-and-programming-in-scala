@@ -7,5 +7,4 @@ public class DVD extends Product {
         super(price);
         mTitle = title;
     }
-
 }

@@ -10,11 +10,13 @@ public class Person implements PersonInterface {
         mWeight = weight;
     }
 
+    @Override
     public float getWeight() {
         // Assume we weigh ourselves here
         return mWeight;
     }
 
+    @Override
     public String getName() {
         return mName;
     }

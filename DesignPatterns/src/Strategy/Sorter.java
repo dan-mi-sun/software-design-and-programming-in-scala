@@ -3,8 +3,6 @@ package Strategy;
 /**
  * An interface used via the Strategy pattern to allow
  * demonstration of different sorting algorithms
- *
- * @author rkh23
  */
 public interface Sorter {
 

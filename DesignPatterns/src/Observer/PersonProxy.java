@@ -17,10 +17,12 @@ public class PersonProxy implements PersonInterface {
         mPerson.registerProxy(this);
     }
 
+    @Override
     public String getName() {
         return mCachedName;
     }
 
+    @Override
     public float getWeight() {
         // Use our cache, which is updated automatically
         return mCachedWeight;

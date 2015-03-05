@@ -1,5 +1,8 @@
 package abstractfactory;
 
-public class BMWEngine extends CarEngine {
-
+public class BMWEngine implements CarEngine {
+    @Override
+    public String toString(){
+        return getClass().toString();
+    }
 }

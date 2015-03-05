@@ -14,6 +14,7 @@ public class WrappedProduct extends Product {
         mGiftType = g;
     }
 
+    @Override
     public float getPrice() {
         return mContents.getPrice() + mGiftType.getWrapPrice();
     }

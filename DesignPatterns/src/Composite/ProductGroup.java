@@ -13,6 +13,7 @@ public class ProductGroup extends Product {
     }
 
     // Override this so it computes the discounted price
+    @Override
     public float getPrice() {
         float price = 0.0f;
         for (Product p : mGroupContents) price += p.getPrice();

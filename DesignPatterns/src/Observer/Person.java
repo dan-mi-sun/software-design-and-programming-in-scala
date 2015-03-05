@@ -14,11 +14,13 @@ public class Person implements PersonInterface {
         mWeight = weight;
     }
 
+    @Override
     public float getWeight() {
         // Assume we compute the latest age estimate here
         return mWeight;
     }
 
+    @Override
     public String getName() {
         return mName;
     }

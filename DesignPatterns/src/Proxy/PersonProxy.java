@@ -10,11 +10,13 @@ public class PersonProxy implements PersonInterface {
         mCachedName = mPerson.getName();
     }
 
+    @Override
     public String getName() {
         // return the cached (local) version
         return mCachedName;
     }
 
+    @Override
     public float getWeight() {
         // Pass through the request to the real object
         return mPerson.getWeight();
