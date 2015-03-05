@@ -9,6 +9,7 @@ import javax.inject.Singleton;
         injects = CoffeeApp.class,
         includes = PumpModule.class
 )
+
 class DripCoffeeModule {
     @Provides
     @Singleton

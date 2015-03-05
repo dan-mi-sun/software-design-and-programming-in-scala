@@ -14,6 +14,7 @@ public class LenientRegistrar implements Registrar {
 
     @Inject
     public LenientRegistrar(StudentStore studentStore) {
+
         this.studentStore = studentStore;
     }
 

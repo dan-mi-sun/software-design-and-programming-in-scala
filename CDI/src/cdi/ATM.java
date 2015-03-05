@@ -1,7 +1,6 @@
 package cdi;
 
-import mydi.ATMTransport;
-
+import javax.inject.Inject;
 import java.math.BigDecimal;
 
 interface ATM {
@@ -9,14 +8,18 @@ interface ATM {
     public void withdraw(BigDecimal amount);
 }
 
-class ATMImpl implements mydi.ATM {
+class ATMImpl implements ATM {
 
+    @Inject
+//    @TransportConfig(retries=5)
     private ATMTransport transport;
+
     private byte[] dummy;
 
-    void setTransport(ATMTransport trans){
-        transport = trans;
-    }
+//    @Inject
+//    void setTransport(ATMTransport trans){
+//        transport = trans;
+//    }
 
     @Override
     public void deposit(BigDecimal amount) {

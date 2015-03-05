@@ -1,11 +1,11 @@
 package org.cdi.advocacy;
 
-//import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 public class TransportFactory {
 
-	//@Produces
+	@Produces
 	ATMTransport createTransport(InjectionPoint injectionPoint) {
 
 		Transport transportConfig = injectionPoint.getAnnotated().getAnnotation(Transport.class);

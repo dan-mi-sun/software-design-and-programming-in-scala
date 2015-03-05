@@ -1,8 +1,11 @@
 package org.cdi.advocacy;
 
 
+import javax.enterprise.inject.Alternative;
+
 //@Soap
-@Transport(type=TransportType.SOAP)
+@Alternative
+//@Transport(type=TransportType.SOAP)
 public class SoapAtmTransport implements ATMTransport {
 	
 	private int retries;

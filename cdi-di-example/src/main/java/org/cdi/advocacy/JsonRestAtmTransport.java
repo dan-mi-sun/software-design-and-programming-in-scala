@@ -2,8 +2,11 @@ package org.cdi.advocacy;
 
 //import javax.enterprise.inject.Alternative;
 
-//@Json //@Alternative
-@Transport(type=TransportType.JSON)
+import javax.enterprise.inject.Alternative;
+
+//@Json //
+@Alternative
+//@Transport(type=TransportType.JSON)
 public class JsonRestAtmTransport implements ATMTransport {
 
 	private int retries;
