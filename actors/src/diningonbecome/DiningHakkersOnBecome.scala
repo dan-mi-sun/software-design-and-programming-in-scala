@@ -1,4 +1,4 @@
-package DiningHakkersOnBecome
+package diningonbecome
 
 // This is edited from activator package sample.become
 

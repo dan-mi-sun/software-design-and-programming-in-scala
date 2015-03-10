@@ -1,3 +1,0 @@
-This is a file that has text in it
-with a number of words per line
-and a number of lines
