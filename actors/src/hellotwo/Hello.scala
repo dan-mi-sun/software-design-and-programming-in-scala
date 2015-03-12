@@ -13,7 +13,6 @@ class HelloActor(myName: String) extends Actor {
 
 object Main extends App {
   val system = ActorSystem("HelloSystem")
-  // (3) changed this line of code
   val helloActor = system.actorOf(Props(new HelloActor("Fred")), name = "helloactor")
   helloActor ! "hello"
   helloActor ! "buenos dias"

@@ -109,9 +109,9 @@ object DiningHakkersOnBecome {
       (name, i) <- List(
         "P0", "P1", "P2", "P3", "P4").zipWithIndex
     } yield {
-//      system.actorOf(
-//        Props(classOf[FSMHakker], name, chopsticks(i), chopsticks((i + 1) % 5)))
-//      hakkers.foreach(_ ! Think)
+      system.actorOf(
+        Props(classOf[FSMHakker], name, chopsticks(i), chopsticks((i + 1) % 5)))
+      hakkers.foreach(_ ! Think)
     }
   }
 }
