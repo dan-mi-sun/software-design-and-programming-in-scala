@@ -5,7 +5,6 @@ public class MergeSort implements Sorter {
 
     @Override
     public void Sort(int[] array) {
-        // TODO Auto-generated method stub
         int r[] = doMergeSort(array, 0, array.length - 1);
 
         for (int i = 0; i < array.length; i++) {
