@@ -1,11 +1,10 @@
-package diningfsm
+package fsm
 
-// This is edited from activator package
-
-import DiningHakkersOnBecome.Chopstick
 import akka.actor._
 
 import scala.concurrent.duration._
+
+// Messages
 
 sealed trait ChopstickMessage
 
@@ -17,6 +16,9 @@ case class CmsgTaken(chopstick: ActorRef) extends ChopstickMessage
 
 case class CmsgBusy(chopstick: ActorRef) extends ChopstickMessage
 
+
+// States
+
 sealed trait ChopstickState
 
 case object CSAvailabe extends ChopstickState
@@ -25,30 +27,36 @@ case object CSTaken extends ChopstickState
 
 case class IsWith(hakker: ActorRef)
 
-class Chopstick extends Actor with FSM[ChopstickState, DiningHakkersOnBecome.IsWith] {
+// FSM
+
+class Chopstick extends Actor with FSM[ChopstickState, IsWith] {
 
   import context._
 
-  startWith(CSAvailabe, DiningHakkersOnBecome.IsWith(system.deadLetters))
+  startWith(CSAvailabe, IsWith(system.deadLetters))
 
   when(CSAvailabe) {
     case Event(CmsgGrab, _) =>
-      goto(CSTaken) using DiningHakkersOnBecome.IsWith(sender) replying CmsgTaken(self)
+      goto(CSTaken) using IsWith(sender) replying CmsgTaken(self)
   }
 
   when(CSTaken) {
     case Event(CmsgGrab, currentState) =>
       stay replying CmsgBusy(self)
     case Event(CmsgRetn, IsWith(hakker)) if sender == hakker =>
-      goto(CSAvailabe) using DiningHakkersOnBecome.IsWith(system.deadLetters)
+      goto(CSAvailabe) using IsWith(system.deadLetters)
   }
 
   initialize
 }
 
+// FSM messages
+
 sealed trait FSMHakkerMessage
 
 object Think extends FSMHakkerMessage
+
+// FSM states
 
 sealed trait FSMHakkerState
 
@@ -64,6 +72,8 @@ case object FirstChopstickDenied extends FSMHakkerState
 
 case object Eating extends FSMHakkerState
 
+// --------------
+
 case class Possess(left: Option[ActorRef], right: Option[ActorRef])
 
 class FSMHakker(name: String, left: ActorRef, right: ActorRef)
@@ -72,7 +82,7 @@ class FSMHakker(name: String, left: ActorRef, right: ActorRef)
   startWith(Waiting, Possess(None, None))
 
   when(Waiting) {
-    case Event(DiningHakkersOnBecome.Think, _) =>
+    case Event(Think, _) =>
       println(s"$name starts to think")
       startThinking(5.seconds)
   }
@@ -134,20 +144,17 @@ class FSMHakker(name: String, left: ActorRef, right: ActorRef)
   }
 }
 
-object DiningHakkersOnFsm {
+object DiningHakkersOnFsm extends App {
 
   val acsy = ActorSystem()
-
-  def main(args: Array[String]) {
-    val chopsticks =
-      for (i <- 0 to 4) yield
-        acsy.actorOf(Props[Chopstick], "C" + i)
-    val hakkers = for {
-      (name, i) <- List("P0", "P1", "P2", "P3", "P4").zipWithIndex
-    } yield
-      acsy.actorOf(
-        Props(classOf[FSMHakker],
-          name, chopsticks(i), chopsticks((i + 1) % 5)))
-    hakkers.foreach(_ ! DiningHakkersOnBecome.Think)
-  }
+  val chopsticks =
+    for (i <- 0 to 4) yield
+      acsy.actorOf(Props[Chopstick], "C" + i)
+  val hakkers = for {
+    (name, i) <- List("P0", "P1", "P2", "P3", "P4").zipWithIndex
+  } yield
+    acsy.actorOf(
+      Props(classOf[FSMHakker],
+        name, chopsticks(i), chopsticks((i + 1) % 5)))
+  hakkers.foreach(_ ! Think)
 }
