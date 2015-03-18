@@ -1,78 +1,9 @@
 package fsm
 
-import akka.actor._
+import akka.actor.{Actor, ActorRef, FSM}
 
+import scala.concurrent.duration.FiniteDuration
 import scala.concurrent.duration._
-
-// Messages
-
-sealed trait ChopstickMessage
-
-object CmsgGrab extends ChopstickMessage
-
-object CmsgRetn extends ChopstickMessage
-
-case class CmsgTaken(chopstick: ActorRef) extends ChopstickMessage
-
-case class CmsgBusy(chopstick: ActorRef) extends ChopstickMessage
-
-
-// States
-
-sealed trait ChopstickState
-
-case object CSAvailabe extends ChopstickState
-
-case object CSTaken extends ChopstickState
-
-case class IsWith(hakker: ActorRef)
-
-// FSM
-
-class Chopstick extends Actor with FSM[ChopstickState, IsWith] {
-
-  import context._
-
-  startWith(CSAvailabe, IsWith(system.deadLetters))
-
-  when(CSAvailabe) {
-    case Event(CmsgGrab, _) =>
-      goto(CSTaken) using IsWith(sender) replying CmsgTaken(self)
-  }
-
-  when(CSTaken) {
-    case Event(CmsgGrab, currentState) =>
-      stay replying CmsgBusy(self)
-    case Event(CmsgRetn, IsWith(hakker)) if sender == hakker =>
-      goto(CSAvailabe) using IsWith(system.deadLetters)
-  }
-
-  initialize
-}
-
-// FSM messages
-
-sealed trait FSMHakkerMessage
-
-object Think extends FSMHakkerMessage
-
-// FSM states
-
-sealed trait FSMHakkerState
-
-case object Waiting extends FSMHakkerState
-
-case object Thinking extends FSMHakkerState
-
-case object Hungry extends FSMHakkerState
-
-case object WaitForOtherChopstick extends FSMHakkerState
-
-case object FirstChopstickDenied extends FSMHakkerState
-
-case object Eating extends FSMHakkerState
-
-// --------------
 
 case class Possess(left: Option[ActorRef], right: Option[ActorRef])
 
@@ -84,7 +15,7 @@ class FSMHakker(name: String, left: ActorRef, right: ActorRef)
   when(Waiting) {
     case Event(Think, _) =>
       println(s"$name starts to think")
-      startThinking(5.seconds)
+      startThinking(5 seconds)
   }
 
   when(Thinking) {
@@ -117,7 +48,7 @@ class FSMHakker(name: String, left: ActorRef, right: ActorRef)
   private def startEating(left: ActorRef, right: ActorRef) = {
     println(s"$name has picked up ${left.path.name} and ${right.path.name} and starts to eat")
     goto(Eating) using
-      Possess(Some(left), Some(right)) forMax (5.seconds)
+      Possess(Some(left), Some(right)) forMax (5 seconds)
   }
 
   when(FirstChopstickDenied) {
@@ -142,19 +73,4 @@ class FSMHakker(name: String, left: ActorRef, right: ActorRef)
     goto(Thinking) using
       Possess(None, None) forMax duration
   }
-}
-
-object DiningHakkersOnFsm extends App {
-
-  val acsy = ActorSystem()
-  val chopsticks =
-    for (i <- 0 to 4) yield
-      acsy.actorOf(Props[Chopstick], "C" + i)
-  val hakkers = for {
-    (name, i) <- List("P0", "P1", "P2", "P3", "P4").zipWithIndex
-  } yield
-    acsy.actorOf(
-      Props(classOf[FSMHakker],
-        name, chopsticks(i), chopsticks((i + 1) % 5)))
-  hakkers.foreach(_ ! Think)
 }
