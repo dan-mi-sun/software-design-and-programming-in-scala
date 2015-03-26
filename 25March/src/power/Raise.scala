@@ -4,15 +4,18 @@ import scala.io.StdIn.{readDouble, readInt}
 
 object Raise extends App {
 
-  def raiseToPower(base: Double, power: Integer): Double = {
-    def raiseToPowerWork(base: Double, power: Integer, accum: Double): Double = {
+  def raiseToPower(base: Double, power: Integer): Option[Double] = {
+    def raiseToPowerWork(base: Double, power: Integer, accum: Double): Option[Double] = {
       if (power == 0)
-        accum
+        Some(accum)
       else
         raiseToPowerWork(base, power - 1, accum * base)
     }
 
-    raiseToPowerWork(base, power, 1.0)
+    if (power <= 0)
+      None
+    else
+      raiseToPowerWork(base, power, 1.0)
   }
 
   print("Enter b: ")
@@ -20,7 +23,7 @@ object Raise extends App {
   print("Enter k: ")
   val k = readInt()
 
-  println(raiseToPower(b, k))
+  println(raiseToPower(b, k).getOrElse(s"Invalid value $k"))
 
 
 }

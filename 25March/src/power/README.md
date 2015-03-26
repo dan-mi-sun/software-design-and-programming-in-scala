@@ -2,6 +2,7 @@ Question
 ========
 
 Write a Scala program that reads a double value `b` and an integer value `k` as input, and them computes the value `b` raised to the power `k` and prints it.
+If the value of k is less than or equal to zero then that is considered an error.
 
 Requirements:
 * You must write a recursive function to compute the power
