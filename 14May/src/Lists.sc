@@ -34,6 +34,13 @@ def myconcat[T](xs: List[T], ys: List[T]): List[T] = xs match {
 
 myconcat(x,y)
 
+def myreverse[T](xs:List[T]): List[T] = xs match {
+  case List() => xs // saves on construction
+  case hd::tl => myreverse(tl) ++ List(hd)
+}
+
+myreverse(y)
+
 
 
 
